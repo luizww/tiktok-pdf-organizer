@@ -1,0 +1,33 @@
+# Ambientes e segredos locais
+.venv/
+venv/
+.env
+.env.*
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.coverage
+.pytest_cache/
+
+# Builds
+build/
+dist/
+output/
+tmp/
+*.spec
+*.exe
+
+# Documentos reais podem conter dados pessoais e fiscais
+*.pdf
+*.xml
+
+# Exemplos abaixo são inteiramente fictícios e seguros para publicação
+!examples/*.pdf
+
+# Editores e sistema operacional
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
