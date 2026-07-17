@@ -1,4 +1,18 @@
-# TikTok PDF Organizer
+<p align="center">
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" width="78" alt="Python">
+</p>
+
+<h1 align="center">TikTok PDF Organizer</h1>
+
+<p align="center">
+  Etiquetas e DANFEs pareadas automaticamente pelo código de rastreio.
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/Python-3.10%2B-3776AB?logo=python&logoColor=white" alt="Python 3.10+">
+  <img src="https://img.shields.io/badge/interface-CustomTkinter-7B2CBF" alt="CustomTkinter">
+  <img src="https://img.shields.io/badge/processamento-local-16A34A" alt="Processamento local">
+</p>
 
 Automação desktop criada para eliminar o tempo gasto relacionando manualmente
 etiquetas e DANFEs.
