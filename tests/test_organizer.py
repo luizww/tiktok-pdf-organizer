@@ -66,6 +66,45 @@ class OrganizerTests(unittest.TestCase):
                 ],
             )
 
+    def test_accepts_same_tracking_repeated_on_one_page(self) -> None:
+        """Etiquetas reais podem imprimir o mesmo código mais de uma vez."""
+
+        with tempfile.TemporaryDirectory() as temporary_directory:
+            directory = Path(temporary_directory)
+            labels = directory / "labels.pdf"
+            danfes = directory / "danfes.pdf"
+            output = directory / "output.pdf"
+
+            self._create_pdf(
+                labels,
+                [f"TOPO {TRACKING_A}\nRODAPÉ {TRACKING_A}"],
+            )
+            self._create_pdf(
+                danfes,
+                [f"Tracking Number: {TRACKING_A}"],
+            )
+
+            result = organize_pdfs(labels, danfes, output)
+
+            self.assertEqual(result.pairs, 1)
+            self.assertEqual(len(PdfReader(output).pages), 2)
+
+    def test_rejects_two_different_trackings_on_one_page(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary_directory:
+            directory = Path(temporary_directory)
+            labels = directory / "labels.pdf"
+            danfes = directory / "danfes.pdf"
+            output = directory / "output.pdf"
+
+            self._create_pdf(
+                labels,
+                [f"ETIQUETA {TRACKING_A} OUTRO PEDIDO {TRACKING_B}"],
+            )
+            self._create_pdf(danfes, [f"DANFE {TRACKING_A}"])
+
+            with self.assertRaises(PdfMappingError):
+                organize_pdfs(labels, danfes, output)
+
     def test_reports_pages_without_tracking(self) -> None:
         with tempfile.TemporaryDirectory() as temporary_directory:
             directory = Path(temporary_directory)
@@ -81,7 +120,7 @@ class OrganizerTests(unittest.TestCase):
             self.assertEqual(result.label_pages_without_tracking, (2,))
             self.assertEqual(result.danfe_pages_without_tracking, (1,))
 
-    def test_rejects_duplicate_tracking(self) -> None:
+    def test_rejects_duplicate_tracking_across_pages(self) -> None:
         with tempfile.TemporaryDirectory() as temporary_directory:
             directory = Path(temporary_directory)
             labels = directory / "labels.pdf"
