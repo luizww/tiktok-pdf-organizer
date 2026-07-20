@@ -53,8 +53,9 @@ segurança de que cada etiqueta será acompanhada pelo documento correto.
 ## Segurança do pareamento
 
 - Não captura 13 dígitos dentro de sequências numéricas maiores;
-- Interrompe o processamento ao encontrar tracking duplicado;
-- Interrompe quando uma página contém mais de um tracking reconhecido;
+- Aceita o mesmo tracking repetido dentro da própria página;
+- Interrompe o processamento ao encontrar o mesmo tracking em páginas diferentes;
+- Interrompe quando uma página contém mais de um tracking diferente;
 - Impede que o arquivo final sobrescreva os PDFs de entrada;
 - Informa etiquetas e DANFEs sem par;
 - Informa páginas nas quais nenhum tracking foi reconhecido;
@@ -103,8 +104,9 @@ py main.py
 
 ## Testes automatizados
 
-Os testes criam PDFs temporários e comprovam que o programa utiliza o mesmo
-tracking, mesmo quando os DANFEs estão fora de ordem.
+Os testes criam PDFs temporários e validam o pareamento, a ordem final, páginas
+sem tracking, códigos duplicados em páginas diferentes e etiquetas que imprimem
+o mesmo tracking mais de uma vez na própria página.
 
 ```powershell
 py -m unittest discover -s tests -v
@@ -112,11 +114,24 @@ py -m unittest discover -s tests -v
 
 ## Gerar executável no Windows
 
+Execute:
+
 ```bat
 build.bat
 ```
 
-O executável será criado em `dist\TikTokPDFOrganizer`.
+O script instala as dependências, executa os testes e cria um único arquivo
+independente em:
+
+```text
+dist\TikTokPDFOrganizer.exe
+```
+
+## Build automático no GitHub
+
+O workflow **Build Windows executable** executa os testes e publica o executável
+como artefato sempre que arquivos relevantes são enviados para a branch `main`.
+Também é possível iniciá-lo manualmente pela aba **Actions**.
 
 ## Privacidade
 
