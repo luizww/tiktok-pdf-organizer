@@ -139,6 +139,10 @@ PDFs reais, XMLs fiscais, executáveis e pastas de build estão bloqueados pelo
 `.gitignore`. Apenas os documentos inteiramente fictícios da pasta `examples`
 podem ser publicados no repositório.
 
+## Na coleção de projetos
+
+Este projeto também está integrado ao [python-fundamentos](https://github.com/luizww/python-fundamentos/tree/main/projetos/pdf_organizer), junto dos meus outros estudos e aplicações em Python. Este repositório conserva seu histórico e pode ser executado de forma independente.
+
 ## Autor
 
 Desenvolvido por [Luiz Othávio](https://github.com/luizww).
